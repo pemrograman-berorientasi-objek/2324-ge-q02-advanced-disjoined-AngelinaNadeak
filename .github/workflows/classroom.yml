@@ -1,6 +1,6 @@
 name: Autograding Tests
 'on':
-- workflow_dispatch
+- push
 - repository_dispatch
 permissions:
   checks: write
@@ -158,7 +158,7 @@ jobs:
           12S2102|12S20003|2022/2023|odd|B(AB)
         comparison-method: contains
         timeout: 1
-        max-score: 20
+        max-score: 10
     - name: t07&#45;01&#45;04
       id: t07-45-01-45-04
       uses: classroom-resources/autograding-io-grader@v1
@@ -194,8 +194,11 @@ jobs:
           enrollment-grade#12S1101#12S20002#2020/2021#even#A
           enrollment-grade#12S1101#12S20003#2020/2021#even#A
           course-history#12S1101
+          find-the-best-student#2020/2021#odd
+          find-the-best-student#2020/2021#even
+          add-best-student#best-student
           ---
-        expected-output: |
+        expected-output: |-
           12S1101|Dasar Sistem Informasi|3|D|2020/2021|odd|IUS (iustisia.simbolon@del.ac.id)
           12S1101|12S20001|2020/2021|odd|B
           12S1101|12S20002|2020/2021|odd|B
@@ -222,9 +225,11 @@ jobs:
           12S1101|12S20001|2020/2021|even|AB
           12S1101|12S20002|2020/2021|even|A
           12S1101|12S20003|2020/2021|even|A
+          12S20002|B/A
+          12S20002|B/A
         comparison-method: exact
         timeout: 1
-        max-score: 20
+        max-score: 10
     - name: t07&#45;01&#45;5
       id: t07-45-01-45-5
       uses: classroom-resources/autograding-io-grader@v1
@@ -262,8 +267,11 @@ jobs:
           enrollment-grade#12S1101#12S20003#2020/2021#even#A
           enrollment-remedial#12S1101#12S20001#2020/2021#even#AB
           course-history#12S1101
+          find-the-best-student#2020/2021#odd
+          find-the-best-student#2020/2021#even
+          add-best-student#best-student
           ---
-        expected-output: |
+        expected-output: |-
           12S1101|Dasar Sistem Informasi|3|D|2020/2021|odd|IUS (iustisia.simbolon@del.ac.id)
           12S1101|12S20001|2020/2021|odd|B
           12S1101|12S20002|2020/2021|odd|B
@@ -290,6 +298,8 @@ jobs:
           12S1101|12S20001|2020/2021|even|AB(BC)
           12S1101|12S20002|2020/2021|even|A
           12S1101|12S20003|2020/2021|even|A
+          12S20002|B/A
+          12S20002|B/A
         comparison-method: exact
         timeout: 1
         max-score: 20
@@ -363,8 +373,9 @@ jobs:
           12S1101|12S20003|2020/2021|even|A
           12S20002|B/A
           12S20002|B/A
-        comparison-method: regex
-        timeout: 10
+        comparison-method: exact
+        timeout: 1
+        max-score: 20
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
