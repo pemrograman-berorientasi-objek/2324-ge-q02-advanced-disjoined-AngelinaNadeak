@@ -2,18 +2,13 @@ package academic.model;
 
 import java.util.Objects;
 
-/**
- * @author 12S22009 - Dolok Butarbutar
- * @author 12S22015 - Angelina Nadeak
- */
-
 public class Enrollment implements GradeHistory {
-    public final String courseCode;
-    public final String studentID;
-    public final String academicYear;
-    public final String semester;
-    public String grade;
-    public int credits;
+    private final String courseCode;
+    private final String studentID;
+    private final String academicYear;
+    private final String semester;
+    private String grade;
+    private int credits;
 
     private String previousGrade = "None"; // Initialize previousGrade to "None"
 
@@ -41,7 +36,6 @@ public class Enrollment implements GradeHistory {
     public String getYear() {
         return academicYear;
     }
-
 
     public String getCode() {
         return courseCode;
@@ -98,9 +92,5 @@ public class Enrollment implements GradeHistory {
     @Override
     public void setPreviousGrade(String previousGrade) {
         this.previousGrade = previousGrade;
-    }
-
-    public int compareTo(Enrollment enrollment2) {
-        return 0;
     }
 }
