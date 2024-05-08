@@ -303,39 +303,7 @@ public class Driver1 {
                         }
                     }
                     break;
-                    case "find-the-best-student":
-                    String academicYearSemester = tokens[1];
-                    String semesterType = tokens[2];
-                    String bestStudentId = "";
-                    double bestGPA = -1;
-
-                    for (Student student : students) {
-                        double gpa = calculateGPA(student.getId(), academicYearSemester, semesterType);
-                        if (gpa > bestGPA) {
-                            bestGPA = gpa;
-                            bestStudentId = student.getId();
-                        } else if (gpa == bestGPA) {
-                            // Jika terdapat kesamaan GPA, ambil mahasiswa dengan NIM Genap
-                            if (Integer.parseInt(student.getId().substring(4, 6)) % 2 == 0) {
-                                bestStudentId = student.getId();
-                            }
-                        }
-                    }
-
-                    // Menambahkan hasil pencarian ke dalam daftar mahasiswa terbaik
-                    System.out.println("add-best-student#" + bestStudentId);
-                    break;
-
-                    case "add-best-student":
-                    String studentId = tokens[1];
-                    for (Student student : students) {
-                        if (student.getId().equals(studentId)) {
-                            System.out.println(student.toString());
-                            break;
-                        }
-                    }
-                    break;
-
+                    
                 default:
                     break;
             }
@@ -389,31 +357,5 @@ public class Driver1 {
             default:
                 return 0.0;
         }
-    }
-
-    private static double calculateGPA(String studentId, String academicYearSemester, String semesterType) {
-        double totalScore = 0;
-        int totalCredits = 0;
-
-        for (Enrollment enrollment : enrollments) {
-            if (enrollment.getId().equals(studentId) &&
-                enrollment.getYear().equals(academicYearSemester.substring(0, 9)) &&
-                enrollment.getSemester().equals(semesterType)) {
-                for (Course course : courses) {
-                    if (course.getCode().equals(enrollment.getCode())) {
-                        totalScore += convertGradeToScore(enrollment.getGrade()) * course.getCredits();
-                        totalCredits += course.getCredits();
-                        break;
-                    }
-                }
-            }
-        }
-
-        // Menghindari pembagian dengan nol
-        if (totalCredits == 0) {
-            return 0;
-        }
-
-        return totalScore / totalCredits;
     }
 }
